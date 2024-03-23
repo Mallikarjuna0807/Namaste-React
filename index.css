@@ -40,4 +40,10 @@
 
 .filter{
     margin: 10px;
+    width: 30%;
+}
+
+.login{
+    padding: 5px 30px;
+    cursor: pointer;
 }
