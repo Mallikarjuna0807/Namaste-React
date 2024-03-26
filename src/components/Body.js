@@ -1,12 +1,15 @@
 import Rescards from "./Rescards";
 import { useEffect, useState } from "react";
-// import resList from "./utility/mockData.js";
+import resList from "./utility/mockData.js";
 import Shimmer from "./Shimmer.js";
 
 const Body = () => {
   const [listOfres, setlistOfres] = useState([]);
   const [filterRes, setfilterRes] = useState([])
   const [searchBox, setSearchbox] = useState("");
+
+
+        
   useEffect(() => {
     // console.log("useEffect calls")
     fetchData();
@@ -14,22 +17,22 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      // "https://www.swiggy.com/mapi/homepage/getCards?lat=14.6862254&lng=77.5984758&apiKey=20240320160355"
-      "https://fakestoreapi.com/products"
+      "https://www.swiggy.com/mapi/homepage/getCards?lat=14.6862254&lng=77.5984758&apiKey=20240320160355"
     );
     const json = await data.json();
     console.log(
       // json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-      json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle
+      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
       ?.restaurants
       );
     setlistOfres(
       // json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-      json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle
+      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
         ?.restaurants
     );
-    setfilterRes(json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle
+    setfilterRes(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
       ?.restaurants)
+
   };
 
   // return listOfres.length === 0 ?(
@@ -74,8 +77,7 @@ const Body = () => {
         {/* {listOfres.map((resList1) => (
           <Rescards key={resList1.info.id} resData={resList1} />
         ))} */}
-        {listOfres &&
-          filterRes.map((resList1) => (
+        {listOfres && filterRes.map((resList1) => (
             <Rescards key={resList1.info.id} resData={resList1} />
           ))}
       </div>
