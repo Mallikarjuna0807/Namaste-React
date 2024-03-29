@@ -1,7 +1,8 @@
 import Rescards from "./Rescards";
 import { useEffect, useState } from "react";
-import resList from "./utility/mockData.js";
 import Shimmer from "./Shimmer.js";
+import { Link } from "react-router-dom";
+
 
 const Body = () => {
   const [listOfres, setlistOfres] = useState([]);
@@ -11,26 +12,26 @@ const Body = () => {
 
         
   useEffect(() => {
-    // console.log("useEffect calls")
     fetchData();
   }, []);
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=14.6862254&lng=77.5984758&apiKey=20240320160355"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.6862254&lng=77.5984758&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
+    console.log(json)
     console.log(
       // json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
       ?.restaurants
       );
     setlistOfres(
       // json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
-    setfilterRes(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
+    setfilterRes(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
       ?.restaurants)
 
   };
@@ -78,7 +79,8 @@ const Body = () => {
           <Rescards key={resList1.info.id} resData={resList1} />
         ))} */}
         {listOfres && filterRes.map((resList1) => (
-            <Rescards key={resList1.info.id} resData={resList1} />
+          <Link key={resList1.info.id} to={"/restaurants/"+resList1.info.id}><Rescards resData={resList1} />
+          </Link>
           ))}
       </div>
     </div>
