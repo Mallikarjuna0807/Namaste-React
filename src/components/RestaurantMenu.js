@@ -6,11 +6,11 @@ const RestaurantMenu = () => {
   const {resId} = useParams();  
   const resItem = useRestaurantMenu(resId);
 
-
+console.log(resItem)
   if (resItem === null) return <Shimmer />;
 
   const {name,cuisines} = resItem?.cards[2]?.card?.card?.info;
-  const {itemCards} = resItem?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+  const {itemCards} = resItem?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
   console.log({itemCards})
   return (
     <div>
