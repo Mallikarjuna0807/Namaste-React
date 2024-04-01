@@ -12,5 +12,15 @@ const Rescards = (props) => {
     </div>
   );
 };
+export const vegLabel = (Rescards) =>{
+  return (props) => {
+    return(
+      <div>
+        <label>VEG</label>
+        <Rescards {...props}/>
+      </div>
+    );
+  };
+};
 
 export default Rescards;

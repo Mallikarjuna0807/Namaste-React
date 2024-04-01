@@ -1,4 +1,4 @@
-import Rescards from "./Rescards";
+import Rescards, {vegLabel} from "./Rescards";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ const Body = () => {
   const [listOfres, setlistOfres] = useState([]);
   const [filterRes, setfilterRes] = useState([]);
   const [searchBox, setSearchbox] = useState("");
+  const ResVegPromote = vegLabel(Rescards);
 
   useEffect(() => {
     fetchData();
@@ -31,7 +32,6 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
-
   const online = useOnline();
   if (online === false) return <h1>check your network!!!</h1>;
 
@@ -82,7 +82,8 @@ const Body = () => {
               key={resList1.info.id}
               to={"/restaurants/" + resList1.info.id}
             >
-              <Rescards resData={resList1} />
+              {resList1.info.veg ? (<ResVegPromote resData={resList1}/>) : (<Rescards resData={resList1} />)}
+              
             </Link>
           ))}
       </div>
